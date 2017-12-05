@@ -95,7 +95,7 @@ public class AllergyProviderTest {
                 "b_a/data[at0001]/items[at0101]/value/defining_code/code_string as Criticality_code, " +
                 "b_a/data[at0001]/items[at0120]/value/defining_code/code_string as Category_code, " +
                 "b_a/data[at0001]/items[at0117]/value/value as Onset_of_last_reaction, " +
-                "b_a/data[at0001]/items[at0058]/valuedefining_code/code_string as Reaction_mechanism_code, " +
+                "b_a/data[at0001]/items[at0058]/value/defining_code/code_string as Reaction_mechanism_code, " +
                 "b_a/data[at0001]/items[at0006]/value/value as Comment, " +
                 "b_a/protocol[at0042]/items[at0062]/value/value as Adverse_reaction_risk_Last_updated, " +
                 "b_a/data[at0001]/items[at0009]/items[at0010]/value as Specific_substance, " +
