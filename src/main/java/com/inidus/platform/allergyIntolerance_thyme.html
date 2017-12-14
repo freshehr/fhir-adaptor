@@ -1,0 +1,20 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="narrative.css"/>
+</head>
+<body>
+
+<table class="hapiPropertyTable">
+    <tbody>
+    <tr th:if="${not resource.code.empty}">
+        <td>Causative agent</td>
+        <td th:text="${resource.code.text}"></td>
+    </tr>
+    <tr th:if="${not resource.assertedDateElement.empty}">
+        <td>Date Asserted</td>
+        <td ><span th:text="${#dates.format(resource.assertedDateElement.value,'dd MMMM yyyy')}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

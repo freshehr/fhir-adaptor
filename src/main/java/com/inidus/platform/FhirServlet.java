@@ -1,6 +1,7 @@
 package com.inidus.platform;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.narrative.CustomThymeleafNarrativeGenerator;
 import ca.uhn.fhir.narrative.DefaultThymeleafNarrativeGenerator;
 import ca.uhn.fhir.rest.api.EncodingEnum;
 import ca.uhn.fhir.rest.server.IResourceProvider;
@@ -32,7 +33,7 @@ public class FhirServlet extends RestfulServer {
     protected void initialize() throws ServletException {
         super.initialize();
 
-        getFhirContext().setNarrativeGenerator(new DefaultThymeleafNarrativeGenerator());
+
 
         LoggerFactory.getLogger(getClass()).info("Initialising FHIR Servlet");
 
@@ -43,5 +44,12 @@ public class FhirServlet extends RestfulServer {
         registerInterceptor(new ResponseHighlighterInterceptor());
         setDefaultPrettyPrint(true);
         setDefaultResponseEncoding(EncodingEnum.JSON);
+
+   /*
+ Code to create FHIR narrative - working but narrative template is immature so disable for now.
+    String propFile = "file:./src/main/java/com/inidus/platform/customnarrative.properties";
+    CustomThymeleafNarrativeGenerator gen = new CustomThymeleafNarrativeGenerator(propFile);
+    getFhirContext().setNarrativeGenerator(gen);
+*/
     }
 }
