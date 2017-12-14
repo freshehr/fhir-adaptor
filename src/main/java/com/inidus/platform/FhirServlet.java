@@ -33,8 +33,6 @@ public class FhirServlet extends RestfulServer {
     protected void initialize() throws ServletException {
         super.initialize();
 
-
-
         LoggerFactory.getLogger(getClass()).info("Initialising FHIR Servlet");
 
         List<IResourceProvider> providers = new ArrayList<>();
@@ -45,11 +43,14 @@ public class FhirServlet extends RestfulServer {
         setDefaultPrettyPrint(true);
         setDefaultResponseEncoding(EncodingEnum.JSON);
 
+
    /*
  Code to create FHIR narrative - working but narrative template is immature so disable for now.
-    String propFile = "file:./src/main/java/com/inidus/platform/customnarrative.properties";
-    CustomThymeleafNarrativeGenerator gen = new CustomThymeleafNarrativeGenerator(propFile);
-    getFhirContext().setNarrativeGenerator(gen);
+
+     String propFile = "file:./src/main/java/com/inidus/platform/customnarrative.properties";
+        CustomThymeleafNarrativeGenerator gen = new CustomThymeleafNarrativeGenerator(propFile);
+        getFhirContext().setNarrativeGenerator(gen);
+
 */
     }
 }

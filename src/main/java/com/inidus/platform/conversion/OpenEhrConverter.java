@@ -41,7 +41,6 @@ public class OpenEhrConverter {
             populateAllergyResource(allergyIntolerance, jsonNode);
             profiles.add(allergyIntolerance);
         }
-
         return profiles;
     }
 
@@ -88,6 +87,31 @@ public class OpenEhrConverter {
         patient.setIdentifier(convertPatientIdentifier(ehrJson));
         retVal.setPatient(patient);
 
+
+
+        //Convert Composer name and ID.
+
+        Practitioner asserter = new Practitioner();
+        asserter.setId("#composer");
+
+        String asserterName = ehrJson.get("composerName").textValue();
+        if (null != asserterName) {
+            asserter.addName().setText(asserterName);
+        }
+
+        String asserterID = ehrJson.get("composerId").textValue();
+        if (null != asserterID) {
+
+            Identifier id = asserter.addIdentifier();
+            id.setValue(asserterID);
+
+            String asserterNamespace = ehrJson.get("composerNamespace").textValue();
+            if (null != asserterNamespace) {
+                id.setSystem(asserterNamespace);
+            }
+        }
+
+        retVal.getAsserter().setResource(asserter);
 
         String onset_of_last_reaction = ehrJson.get("Onset_of_last_reaction").textValue();
         if (null != onset_of_last_reaction) {
@@ -139,6 +163,19 @@ public class OpenEhrConverter {
         identifier.setValue(ehrJson.get("subjectId").textValue());
         identifier.setSystem(convertPatientIdentifierSystem(ehrJson));
         return identifier;
+    }
+
+    private Identifier convertComposerIdentifier(JsonNode ehrJson) {
+        Identifier identifier = new Identifier();
+        identifier.setValue(ehrJson.get("composerIdentifier").textValue());
+        identifier.setSystem(convertPatientIdentifierSystem(ehrJson));
+        return identifier;
+    }
+
+    private HumanName convertComposerName(JsonNode ehrJson) {
+        HumanName asserterName = new HumanName();
+        asserterName.setText(ehrJson.get("composerName").textValue());
+        return asserterName;
     }
 
     private String convertPatientIdentifierSystem(JsonNode ehrJson) {
